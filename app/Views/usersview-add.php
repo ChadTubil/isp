@@ -21,12 +21,12 @@
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 <label class="custom-label" for="username" style="color: black;">USERNAME</label>
                                 <input type="text" class="form-control form-control-user" id="username"
-                                    name="user" placeholder="Username">
+                                    name="user" placeholder="Username" style="color: black;">
                             </div>
                             <div class="col-sm-6">
                                 <label class="custom-label" for="password" style="color: black;">PASSWORD</label>
                                 <input type="text" class="form-control form-control-user" id="password"
-                                    name="pass" placeholder="Password">
+                                    name="pass" placeholder="Password" style="color: black;">
                             </div>
                         </div>
                         <br>
@@ -34,30 +34,27 @@
                         <div class="form-group row">
                             <div class="col-sm-3 mb-3 mb-sm-0">
                                 <div class="custom-control custom-checkbox small">
-                                    <input type="checkbox" class="custom-control-input" id="adminCheck">
-                                    <label class="custom-control-label" for="adminCheck" style="color: black;"
-                                    name="admin" value="1">ADMINISTRATION</label>
+                                    <input type="checkbox" class="custom-control-input" id="adminCheck" name="chkadmin" value="1">
+                                    <label class="custom-control-label" for="adminCheck" style="color: black;">ADMINISTRATION</label>
                                 </div>
                             </div>
                             <div class="col-sm-3 mb-3 mb-sm-0">
                                 <div class="custom-control custom-checkbox small">
-                                    <input type="checkbox" class="custom-control-input" id="cashierCheck">
-                                    <label class="custom-control-label" for="cashierCheck" style="color: black;"
-                                    name="cashier" value="1">CASHIER</label>
+                                    <input type="checkbox" class="custom-control-input" id="cashierCheck" name="chkcashier" value="1">
+                                    <label class="custom-control-label" for="cashierCheck" style="color: black;">CASHIER</label>
                                 </div>
                             </div>
                             <div class="col-sm-3 mb-3 mb-sm-0">
                                 <div class="custom-control custom-checkbox small">
-                                    <input type="checkbox" class="custom-control-input" id="staffCheck">
-                                    <label class="custom-control-label" for="staffCheck" style="color: black;"
-                                    name="staff" value="1">STAFF</label>
+                                    <input type="checkbox" class="custom-control-input" id="staffCheck" name="chkstaff" value="1">
+                                    <label class="custom-control-label" for="staffCheck" style="color: black;">STAFF</label>
                                 </div>
                             </div>
                         </div>
                     
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-success btn-icon-split">
+                    <button class="btn btn-success btn-icon-split" type="submit" name="add">
                         <span class="icon text-white-50"><i class="fas fa-check"></i></span>
                         <span class="text">SAVE</span>
                     </button>

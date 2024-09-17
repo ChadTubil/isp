@@ -14,3 +14,5 @@ $routes->get('users', 'UsersController::index');
 $routes->add('users/delete/(:segment)', 'UsersController::userdelete/$1');
 $routes->get('users/add', 'UsersController::useradd');
 $routes->post('users/add', 'UsersController::useradd');
+$routes->get('users/edit/(:segment)', 'UsersController::useredit/$1');
+$routes->post('users/edit/(:segment)', 'UsersController::useredit/$1');

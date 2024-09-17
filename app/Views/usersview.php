@@ -34,14 +34,21 @@
                     <tbody>
                         <?php foreach($usersinfo as $usersi): ?>
                             <tr>
-                                <td><?= $usersi['uaccid']; ?></td>
+                                <td><?php if($usersi['uaccid'] == 0){
+                                            echo 'NO ACCOUNT';
+                                        }else{
+                                            echo "EMP-".$usersi['uaccid'];
+                                        }
+                                    ?>
+                                </td>
                                 <td><?= $usersi['username']; ?></td>
                                 <td><?= $usersi['password']; ?></td>
                                 <td style="text-align: center;">
                                     <button class="btn btn-warning btn-sm">
                                         <i class="fas fa-fw fa-key"></i>
                                     </button>
-                                    <button class="btn btn-info btn-sm">
+                                    <button class="btn btn-info btn-sm" title="Edit"
+                                    onclick="window.location.href='<?= base_url(); ?>users/edit/<?= $usersi['uid']; ?>'">
                                         <i class="fas fa-fw fa-pen"></i>
                                     </button>
                                     <button class="btn btn-danger btn-sm" title="Delete"
