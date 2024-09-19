@@ -32,7 +32,7 @@ class UsersController extends BaseController
             'isdel' => '1',
         ];
         $this->usersModel->where('uid', $id)->update($id, $data);
-        session()->setTempdata('deletesuccess', 'User is deleted!', 2);
+        session()->setTempdata('error', 'User is deleted!', 2);
         return redirect()->to(base_url()."users"); 
         
         

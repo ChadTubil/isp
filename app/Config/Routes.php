@@ -16,3 +16,10 @@ $routes->get('users/add', 'UsersController::useradd');
 $routes->post('users/add', 'UsersController::useradd');
 $routes->get('users/edit/(:segment)', 'UsersController::useredit/$1');
 $routes->post('users/edit/(:segment)', 'UsersController::useredit/$1');
+// EMPLOYEES
+$routes->get('users', 'EmployeesController::index');
+// STATUS
+$routes->get('status', 'StatusController::index');
+$routes->get('status/add', 'StatusController::statusadd');
+$routes->post('status/add', 'StatusController::statusadd');
+$routes->add('status/delete/(:segment)', 'StatusController::statusdelete/$1');

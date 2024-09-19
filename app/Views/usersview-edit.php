@@ -13,7 +13,7 @@
         <div class="col-xl-7 col-m-12">
             <div class="card shadow mb-4">
                 <div class="card-header py-3" style="background-color: #263A56">
-                    <h6 class="m-0 font-weight-bold" style="color: white">Add User</h6>
+                    <h6 class="m-0 font-weight-bold" style="color: white">UPDATE USER</h6>
                 </div>
                 <div class="card-body">
                 <?php foreach($usersedit as $usere): ?>

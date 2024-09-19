@@ -11,9 +11,33 @@
 <!-- CODE START HERE -->
     <div class="row">
         <div class="col-xl-7 col-m-12">
+            <?php if(isset($validation)): ?>
+                <div class="card bg-danger text-white shadow">
+                    <div class="card-body" style="text-align: left;">
+                        <?= validation_list_errors() ?>
+                    </div>
+                </div>
+                <br>
+            <?php endif; ?>
+            <?php if(session()->getTempdata('success')): ?>
+                <div class="card bg-success text-white shadow">
+                    <div class="card-body" style="text-align: left;">
+                        <?= session()->getTempdata('success') ?>
+                    </div>
+                </div>
+                <br>
+            <?php endif; ?>
+            <?php if(session()->getTempdata('error')): ?>
+                <div class="card bg-danger text-white shadow">
+                    <div class="card-body" style="text-align: left;">
+                        <?= session()->getTempdata('error') ?>
+                    </div>
+                </div>
+                <br>
+            <?php endif; ?>
             <div class="card shadow mb-4">
                 <div class="card-header py-3" style="background-color: #263A56">
-                    <h6 class="m-0 font-weight-bold" style="color: white">Add User</h6>
+                    <h6 class="m-0 font-weight-bold" style="color: white">ADD USER</h6>
                 </div>
                 <div class="card-body">
                     <?= form_open('users/add', ['class' => 'user']); ?>
