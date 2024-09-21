@@ -4,11 +4,12 @@ use \CodeIgniter\Model;
 
 class EmployeesModel extends Model 
 {
-    protected $table = 'users';
-    protected $primaryKey = 'uid';
+    protected $table = 'employees';
+    protected $primaryKey = 'empid';
     protected $allowedFields = [
-        'uaccid', 'username', 'password', 'admin',
-        'cashier', 'staff', 'status', 'isdel',
+        'empnum', 'empfn', 'mn', 'ln',
+        'extension', 'fullname', 'hiringdate', 'resignationdate',
+        'position', 'status', 'isdel',
     ];
     protected $returnType = 'array';
 }

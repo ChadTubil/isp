@@ -35,18 +35,19 @@
     <?php endif; ?>
     <div class="card shadow mb-4">
         <div class="card-header py-3" style="background-color: #263A56">
-            <h6 class="m-0 font-weight-bold" style="color: white;">EMPLOYEMENT STATUS</h6>
+            <h6 class="m-0 font-weight-bold" style="color: white;">EMPLOYEES</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive" style="color: black;">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="color: black;">
                     <thead>
                         <tr style="background-color: #263A56; color: white;">
-                            <th>STATUS</th>
-                            <th>DESCRIPTION</th>
+                            <th>ID</th>
+                            <th>NAME</th>
+                            <th>Status</th>
                             <th style="text-align: center;">
                                 <button class="btn btn-success btn-sm" style="border: 1px solid white;" title="Add"
-                                    onclick="window.location.href='<?= base_url(); ?>status/add'">
+                                    onclick="window.location.href='<?= base_url(); ?>employees/add'">
                                     <i class="fas fa-fw fa-plus"></i>
                                     ADD
                                 </button>
@@ -54,17 +55,27 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($statusdata as $statusd): ?>
+                        <?php foreach($employeesdata as $employeesd): ?>
                             <tr>
-                                <td><strong><?= $statusd['name']; ?></strong></td>
-                                <td><?= $statusd['description']; ?></td>
+                                <td>ISP<?= $employeesd['empnum']; ?></td>
+                                <td><?= $employeesd['fullname']; ?></td>
+                                <td>
+                                    <?php $EMPP = $employeesd['position']; ?>
+                                    <?php foreach($positionsdata as $positiond){
+                                        if($positiond['posid'] == $EMPP){
+                                            echo $positiond['name'];
+                                        }else{
+                                            echo 'No Position';
+                                        }
+                                    } ?>
+                                </td>
                                 <td style="text-align: center;">
                                     <button class="btn btn-info btn-sm" title="Edit"
-                                    onclick="window.location.href='<?= base_url(); ?>status/edit/<?= $statusd['stid']; ?>'">
+                                    onclick="window.location.href='<?= base_url(); ?>employees/edit/<?= $employeesd['empid']; ?>'">
                                         <i class="fas fa-fw fa-pen"></i>
                                     </button>
                                     <button class="btn btn-danger btn-sm" title="Delete"
-                                        onclick="window.location.href='<?= base_url(); ?>status/delete/<?= $statusd['stid']; ?>'">
+                                        onclick="window.location.href='<?= base_url(); ?>employees/delete/<?= $employeesd['empid']; ?>'">
                                         <i class="fas fa-fw fa-trash"></i>
                                     </button>
                                 </td>

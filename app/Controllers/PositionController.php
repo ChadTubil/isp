@@ -1,15 +1,15 @@
 <?php
 
 namespace App\Controllers;
-use App\Models\StatusModel;
+use App\Models\PositionsModel;
 use App\Models\UsersModel;
-class StatusController extends BaseController
+class PositionController extends BaseController
 {
-    public $statusModel;
+    public $posModel;
     public $usersModel;
     public $session;
     public function __construct() {
-        $this->statusModel = new StatusModel();
+        $this->posModel = new PositionsModel();
         $this->usersModel = new UsersModel();
         helper('form');
         $this->session = session();
@@ -17,8 +17,8 @@ class StatusController extends BaseController
     public function index()
     {
         $data = [
-            'page_title' => 'ISP - Employment Status',
-            'page_heading' => 'EMPLOYMENT STATUS',
+            'page_title' => 'ISP - Employment Position',
+            'page_heading' => 'EMPLOYMENT POSITION',
         ];
         if(!session()->has('logged_user'))
         {
@@ -27,15 +27,15 @@ class StatusController extends BaseController
         $uid = session()->get('logged_user');
         $data['userdata'] = $this->usersModel->getLoggedInUserData($uid);
 
-        $data['statusdata'] = $this->statusModel->where('isdel', '0')->findAll();
+        $data['positiondata'] = $this->posModel->where('isdel', '0')->findAll();;
 
-        return view('statusview', $data);
+        return view('positionview', $data);
     }
-    public function statusadd()
+    public function positionadd()
     {
         $data = [
-            'page_title' => 'ISP - Employment Status',
-            'page_heading' => 'Employment Status',
+            'page_title' => 'ISP - Employment Position',
+            'page_heading' => 'EMPLOYMENT POSITION',
         ];
         if(!session()->has('logged_user'))
         {
@@ -44,26 +44,26 @@ class StatusController extends BaseController
         $uid = session()->get('logged_user');
         $data['userdata'] = $this->usersModel->getLoggedInUserData($uid);
 
-        $data['statusdata'] = $this->statusModel->where('isdel', '0')->findAll();
+        $data['positiondata'] = $this->posModel->where('isdel', '0')->findAll();
 
         if ($this->request->is('post')) {
             $rules = [
-                'iptstatus' => [
+                'iptposition' => [
                         'rules' => 'required',
                         'errors' => [
-                            'required' => 'Status is required.',
+                            'required' => 'Position is required.',
                         ],
                     ],
             ];
             if($this->validate($rules))
             {
                 $data = [
-                    'name' => $this->request->getVar('iptstatus'),
+                    'name' => $this->request->getVar('iptposition'),
                     'description' => $this->request->getVar('iptdescription'),
                 ];
-                $this->statusModel->save($data);
-                session()->setTempdata('success', 'Status added successfully', 3);
-                return redirect()->to(base_url().'status');
+                $this->posModel->save($data);
+                session()->setTempdata('success', 'Position added successfully', 3);
+                return redirect()->to(base_url().'position');
             }
             else
             {
@@ -71,22 +71,22 @@ class StatusController extends BaseController
             }
         }
 
-        return view('statusview-add', $data);
+        return view('positionview-add', $data);
     }
-    public function statusdelete($id=null) {
+    public function positiondelete($id=null) {
         $data = [
             'isdel' => '1',
         ];
-        $this->statusModel->where('stid', $id)->update($id, $data);
-        session()->setTempdata('error', 'Status is deleted!', 2);
-        return redirect()->to(base_url()."status"); 
+        $this->posModel->where('posid', $id)->update($id, $data);
+        session()->setTempdata('error', 'Position is deleted!', 2);
+        return redirect()->to(base_url()."position"); 
         
         
     }
-    public function statusedit($id=null){
+    public function positionedit($id=null){
         $data = [
-            'page_title' => 'ISP - Employment Status',
-            'page_heading' => 'Employment Status',
+            'page_title' => 'ISP - Employment Position',
+            'page_heading' => 'EMPLOYMENT POSITION',
         ];
         if(!session()->has('logged_user'))
         {
@@ -95,18 +95,18 @@ class StatusController extends BaseController
         $uid = session()->get('logged_user');
         $data['userdata'] = $this->usersModel->getLoggedInUserData($uid);
 
-        $data['statusdata'] = $this->statusModel->where('stid', $id)->findAll();
+        $data['positiondata'] = $this->posModel->where('posid', $id)->findAll();
 
         if ($this->request->is('post')) {
             $data = [
-                'name' => $this->request->getVar('iptstatus'),
+                'name' => $this->request->getVar('iptposition'),
                 'description' => $this->request->getVar('iptdescription'),
             ];
-            $this->statusModel->where('stid', $id)->update($id, $data);
-            session()->setTempdata('success', 'Status is updated', 3);
-            return redirect()->to(base_url().'status');
+            $this->posModel->where('posid', $id)->update($id, $data);
+            session()->setTempdata('success', 'Position is updated', 3);
+            return redirect()->to(base_url().'position');
         }
 
-        return view('statusview-edit', $data);
+        return view('positionview-edit', $data);
     }
 }

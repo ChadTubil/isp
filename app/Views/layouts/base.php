@@ -75,6 +75,11 @@
             </div>
 
             <li class="nav-item">
+                <a class="nav-link" href="<?= base_url() ?>employees">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Employees Management</span></a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="<?= base_url() ?>users">
                     <i class="fas fa-fw fa-users"></i>
                     <span>Users Management</span></a>
@@ -89,7 +94,7 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Employees</h6>
-                        <a class="collapse-item" href="login.html">Position</a>
+                        <a class="collapse-item" href="<?= base_url() ?>position">Position</a>
                         <a class="collapse-item" href="<?= base_url() ?>status">Status</a>
                     </div>
                 </div>
