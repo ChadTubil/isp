@@ -16,6 +16,8 @@ $routes->get('users/add', 'UsersController::useradd');
 $routes->post('users/add', 'UsersController::useradd');
 $routes->get('users/edit/(:segment)', 'UsersController::useredit/$1');
 $routes->post('users/edit/(:segment)', 'UsersController::useredit/$1');
+$routes->get('users/access/(:segment)', 'UsersController::useraccess/$1');
+$routes->add('users/link/(:segment)/(:segment)', 'UsersController::userlink/$1/$1');
 // EMPLOYEES
 $routes->get('employees', 'EmployeesController::index');
 $routes->get('employees/add', 'EmployeesController::employeesadd');

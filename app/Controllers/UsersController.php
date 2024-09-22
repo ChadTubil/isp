@@ -2,12 +2,18 @@
 
 namespace App\Controllers;
 use App\Models\UsersModel;
+use App\Models\EmployeesModel;
+use App\Models\PositionsModel;
 class UsersController extends BaseController
 {
     public $usersModel;
+    public $empModel;
+    public $posModel;
     public $session;
     public function __construct() {
         $this->usersModel = new UsersModel();
+        $this->empModel = new EmployeesModel();
+        $this->posModel = new PositionsModel();
         helper('form');
         $this->session = session();
     }
@@ -34,8 +40,6 @@ class UsersController extends BaseController
         $this->usersModel->where('uid', $id)->update($id, $data);
         session()->setTempdata('error', 'User is deleted!', 2);
         return redirect()->to(base_url()."users"); 
-        
-        
     }
     public function useradd()
     {
@@ -161,5 +165,38 @@ class UsersController extends BaseController
         }
 
         return view('usersview-edit', $data);
+    }
+    public function useraccess($id=null){
+        $data = [
+            'page_title' => 'ISP - Users Management',
+            'page_heading' => 'USERS MANAGEMENT',
+        ];
+        if(!session()->has('logged_user'))
+        {
+            return redirect()->to(base_url());
+        }
+        $uid = session()->get('logged_user');
+        $data['userdata'] = $this->usersModel->getLoggedInUserData($uid);
+        $data['usersinfo'] = $this->usersModel->where('isdel', '0')->findAll();
+
+        $data['usersedit'] = $this->usersModel->where('uid', $id)->findAll();
+        $data['empdata'] = $this->empModel->where('isdel', '0')
+        ->where('status', 0)->findAll();
+        $data['posdata'] = $this->posModel->where('isdel', '0')->findAll();
+
+        return view('usersview-access', $data);
+
+    }
+    public function userlink($id=null, $empid=null){
+        $data = [
+            'uaccid' => $empid,
+        ];
+        $this->usersModel->where('uid', $id)->update($id, $data);
+        $empdata = [
+            'status' => '1',
+        ];
+        $this->empModel->where('empnum', $empid)->update($empid, $empdata);
+        session()->setTempdata('success', 'Account linked!', 2);
+        return redirect()->to(base_url()."users"); 
     }
 }

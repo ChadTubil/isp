@@ -42,7 +42,7 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="color: black;">
                     <thead>
                         <tr style="background-color: #263A56; color: white;">
-                            <th>ID</th>
+                            <th>EMPLOYEE ID</th>
                             <th>Username</th>
                             <th>Status</th>
                             <th style="text-align: center;">
@@ -60,14 +60,15 @@
                                 <td><?php if($usersi['uaccid'] == 0){
                                             echo 'NO ACCOUNT';
                                         }else{
-                                            echo "EMP-".$usersi['uaccid'];
+                                            echo "ISP".$usersi['uaccid'];
                                         }
                                     ?>
                                 </td>
                                 <td><?= $usersi['username']; ?></td>
                                 <td><?= $usersi['password']; ?></td>
                                 <td style="text-align: center;">
-                                    <button class="btn btn-warning btn-sm" <?php if($usersi['uaccid'] == '0'){}else{echo 'hidden';} ?>>
+                                    <button class="btn btn-warning btn-sm" <?php if($usersi['uaccid'] == '0'){}else{echo 'hidden';} ?>
+                                        title="Edit" onclick="window.location.href='<?= base_url(); ?>users/access/<?= $usersi['uid']; ?>'">
                                         <i class="fas fa-fw fa-user-plus"></i>
                                     </button>
                                     <button class="btn btn-info btn-sm" title="Edit"
