@@ -57,3 +57,15 @@ $routes->post('inclusions/add', 'InclusionsController::inclusionadd');
 $routes->add('inclusions/delete/(:segment)', 'InclusionsController::inclusiondelete/$1');
 $routes->get('inclusions/edit/(:segment)', 'InclusionsController::inclusionedit/$1');
 $routes->post('inclusions/edit/(:segment)', 'InclusionsController::inclusionedit/$1');
+// CLIENTS
+$routes->get('register-client', 'ClientsController::index');
+$routes->post('register-client', 'ClientsController::index');
+$routes->get('clients', 'ClientsController::clients');
+$routes->post('clients', 'ClientsController::clients');
+$routes->add('clients/delete/(:segment)', 'ClientsController::clientdelete/$1');
+$routes->get('clients/edit/(:segment)', 'ClientsController::clientedit/$1');
+$routes->post('clients/edit/(:segment)', 'ClientsController::clientedit/$1');
+$routes->get('clients/process/(:segment)', 'ClientsController::clientprocess/$1');
+$routes->get('clients/process-1/(:segment)/(:segment)', 'ClientsController::clientprocess1/$1/$2');
+$routes->add('clients/process-2/(:segment)/(:segment)', 'ClientsController::clientprocess2/$1/$2');
+$routes->get('clients-bill-process(:segment)', 'ClientsController::clientsbill/$1');

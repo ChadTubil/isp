@@ -49,8 +49,22 @@
             <div class="sidebar-heading">
                 TRANSACTIONS
             </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
+            <!-- Clients -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#clients"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Clients</span>
+                </a>
+                <div id="clients" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Management</h6>
+                        <a class="collapse-item" href="<?= base_url() ?>register-client">Register Client</a>
+                        <a class="collapse-item" href="<?= base_url() ?>clients">Clients</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Set Up -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#setup"
                     aria-expanded="true" aria-controls="collapseTwo">
@@ -236,6 +250,7 @@
     <script src="<?= base_url(); ?>public/assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <!-- Page level custom scripts -->
     <script src="<?= base_url(); ?>public/assets/js/demo/datatables-demo.js"></script>
+
 </body>
 
 </html>
