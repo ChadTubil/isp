@@ -51,6 +51,21 @@
             </div>
             <!-- Clients -->
             <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#billing"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-money-bill"></i>
+                    <span>Billing</span>
+                </a>
+                <div id="billing" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <!-- <h6 class="collapse-header">Management</h6> -->
+                        <a class="collapse-item" href="<?= base_url() ?>bills-transaction">Transaction</a>
+                        <a class="collapse-item" href="<?= base_url() ?>bills">Bills</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Clients -->
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#clients"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-users"></i>

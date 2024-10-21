@@ -70,3 +70,6 @@ $routes->get('clients/process-1/(:segment)/(:segment)', 'ClientsController::clie
 $routes->add('clients/process-2/(:segment)/(:segment)', 'ClientsController::clientprocess2/$1/$2');
 $routes->get('clients-bill-process/(:segment)', 'ClientsController::clientsbill/$1');
 $routes->add('clients-bill-process-2/(:segment)', 'ClientsController::clientsbill2/$1');
+// BILLS
+$routes->get('bills', 'BillsController::index');
+$routes->get('bills/view/(:segment)', 'BillsController::view/$1');

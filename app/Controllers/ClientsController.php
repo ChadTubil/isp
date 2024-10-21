@@ -43,7 +43,7 @@ class ClientsController extends BaseController
         $data['userdata'] = $this->usersModel->getLoggedInUserData($uid);
 
         $data['clientdata'] = $this->clientsModel->where('isdel', '0')->findAll();
-
+        $data['accountsdata'] = $this->accountsModel->where('isdel', '0')->findAll();
         if ($this->request->is('post')) {
             $rules = [
                 'iptlastname' => [
@@ -155,8 +155,9 @@ class ClientsController extends BaseController
         }
         $uid = session()->get('logged_user');
         $data['userdata'] = $this->usersModel->getLoggedInUserData($uid);
-
+        $data['accountsdata'] = $this->accountsModel->where('isdel', '0')->findAll();
         $data['clientdata'] = $this->clientsModel->where('isdel', '0')->paginate(20);
+        $data['plandata'] = $this->plansModel->where('isdel', '0')->findAll();
 
         if ($this->request->is('post')) {
             $searchClient = $this->request->getVar('searchclient');

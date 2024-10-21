@@ -72,11 +72,38 @@
                             <tr>
                                 <td><?= $clientd['clientid']; ?></td>
                                 <td><?= $clientd['fullname']; ?></td>
-                                <td></td>
-                                <td></td>
+                                <td>
+                                    <?php foreach($accountsdata as $accountsd): ?>
+                                        <?php if($clientd['clientid'] == $accountsd['clientid']): ?>
+                                            <?php foreach($plandata as $pland): ?>
+                                                <?php if($accountsd['planid'] == $pland['planid']): ?>
+                                                    <?= $pland['name']; ?>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        <?php else: ?>
+                                            --
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </td>
+                                <td>
+                                    <?php foreach($accountsdata as $accountsd): ?>
+                                        <?php if($clientd['clientid'] == $accountsd['clientid']): ?>
+                                            <?= $accountsd['accountid']; ?>
+                                        <?php else: ?>
+                                            --
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </td>
                                 <td style="text-align: center;">
                                     <button class="btn btn-primary btn-sm" title="Process"
-                                    onclick="window.location.href='<?= base_url(); ?>clients/process/<?= $clientd['clientid']; ?>'">
+                                    onclick="window.location.href='<?= base_url(); ?>clients/process/<?= $clientd['clientid']; ?>'"
+                                    <?php foreach($accountsdata as $accountsd): ?>
+                                        <?php if($clientd['clientid'] == $accountsd['clientid']): ?>
+                                            disabled
+                                        <?php else: ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                    >
                                         <i class="fas fa-fw fa-circle-notch"></i>
                                     </button>
                                     <button class="btn btn-info btn-sm" title="Edit"
