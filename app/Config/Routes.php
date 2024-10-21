@@ -73,3 +73,4 @@ $routes->add('clients-bill-process-2/(:segment)', 'ClientsController::clientsbil
 // BILLS
 $routes->get('bills', 'BillsController::index');
 $routes->get('bills/view/(:segment)', 'BillsController::view/$1');
+$routes->get('bills/print/(:segment)', 'BillsController::print/$1');

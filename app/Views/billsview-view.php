@@ -273,12 +273,12 @@
             </div>
             <div class="card-footer">
                 <button class="btn btn-success btn-icon-split" title="Print"
-                    onclick="window.location.href='<?= base_url(); ?>clients'">
+                    onclick="window.location.href='<?= base_url(); ?>bills/print/<?php foreach($billsdata as $billsd){echo $billsd['billsid'];}?>'">
                     <span class="icon text-white-50"><i class="fas fa-ban"></i></span>
                     <span class="text">PRINT</span>
                 </button>
                 <button class="btn btn-danger btn-icon-split" title="Cancel"
-                    onclick="window.location.href='<?= base_url(); ?>clients'">
+                    onclick="window.location.href='<?= base_url(); ?>bills'">
                     <span class="icon text-white-50"><i class="fas fa-ban"></i></span>
                     <span class="text">CANCEL</span>
                 </button>
