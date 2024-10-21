@@ -7,6 +7,7 @@ use App\Models\PlansModel;
 use App\Models\AccountsModel;
 use App\Models\BundlesModel;
 use App\Models\InclusionModel;
+use App\Models\BillsModel;
 class ClientsController extends BaseController
 {
     public $clientsModel;
@@ -15,6 +16,7 @@ class ClientsController extends BaseController
     public $accountsModel;
     public $bundlesModel;
     public $inclusionModel;
+    public $billsModel;
     public $session;
     public function __construct() {
         $this->clientsModel = new ClientsModel();
@@ -23,6 +25,7 @@ class ClientsController extends BaseController
         $this->accountsModel = new AccountsModel();
         $this->bundlesModel = new BundlesModel();
         $this->inclusionModel = new InclusionModel();
+        $this->billsModel = new BillsModel();
         helper('form');
         $this->session = session();
     }
@@ -278,11 +281,83 @@ class ClientsController extends BaseController
         }
         $uid = session()->get('logged_user');
         $data['userdata'] = $this->usersModel->getLoggedInUserData($uid);
-        $data['clientdata'] = $this->clientsModel->where('clientid', $clientid)->findAll();
-        $data['plandata'] = $this->plansModel->where('planid', $planid)->findAll();
-        $data['bundledata'] = $this->bundlesModel->where('planid', $planid)->findAll();
+
+        $accountdata = $this->accountsModel->where('accountid', $id)->findAll();
+        foreach($accountdata as $accountd){
+            $Client = $accountd['clientid'];
+            $Plan = $accountd['planid'];
+            $Bill = $accountd['billid'];
+        }
+        $data['clientdata'] = $this->clientsModel->where('clientid', $Client)->findAll();
+        $data['plandata'] = $this->plansModel->where('planid', $Plan)->findAll();
+        $data['bundledata'] = $this->bundlesModel->where('planid', $Plan)->findAll();
         $data['inclusiondata'] = $this->inclusionModel->where('isdel', '0')->findAll();
+        $data['accountsdata'] = $this->accountsModel->where('accountid', $id)->findAll();
+
+        $data['NEWSOA'] = $this->accountsModel->where('billid')->countAll();
 
         return view('clientbillview', $data);
+    }
+    public function clientsbill2($id=null){
+        $NEWSOA = $this->accountsModel->where('billid')->countAll();
+        $ACCOUNTDATA = $this->accountsModel->where('accountid', $id)->findAll();
+        foreach($ACCOUNTDATA as $ACCOUNTD){
+            $PLANID = $ACCOUNTD['planid'];
+            $CLIENTID = $ACCOUNTD['clientid'];
+            $GETBILLNO = $ACCOUNTD['billid'];
+            $NEWBILLNO = $GETBILLNO + 1;
+            $START = $ACCOUNTD['createdat'];
+            $FORMATED = date("m-d-Y", strtotime($START));
+            $END = date('Y-m-d',strtotime('+60 days',strtotime($START)));
+        }
+        $CLIENTDATA = $this->clientsModel->where('clientid', $CLIENTID)->findAll();
+        foreach($CLIENTDATA as $CLIENTD){
+            $EMAIL = $CLIENTD['email'];
+        }
+        $PLANDATA = $this->plansModel->where('planid', $PLANID)->findAll();
+        foreach($PLANDATA as $PLAND){
+            $Price = $PLAND['price'];
+            $PRICEWITHADVANCE = $Price * 2;
+        }
+        $db = db_connect();
+        $query = $db->query("SELECT SUM(inclusions.price) as TOTALINCPRICE FROM bundles LEFT JOIN inclusions ON bundles.inclusionid = inclusions.inclid WHERE bundles.planid =".$PLANID."");
+        foreach($query->getRow() as $rowResult){
+            $INCTOTAL =  $rowResult;
+        }
+        $TOTALAMOUNTDUE = $PRICEWITHADVANCE + $INCTOTAL;
+        $data = [
+            'soano' => 'INOO'.$NEWSOA,
+            'billno' => $NEWBILLNO,
+            'accountid' => $id,
+            'amounttopay' => $TOTALAMOUNTDUE,
+            'startbill' => $START,
+            'endbill' => $END,
+            'duedate' => $END,
+        ];
+        // print_r($data);
+        $this->billsModel->save($data);
+        
+        // EMAIL
+        $to = $EMAIL;
+        $subject = 'ISP Internet Application Process';
+        $message = 'Hi!,<br><br>Your Account is successfully created. Please open your account in our website.
+        <br>
+        Your user id is your email address registered to us and your password is your lastname.
+        <br>
+        Thank you!';
+        $email = \Config\Services::email();
+        $email->setFrom('chadtubil.work@gmil.com', 'Chad Tubil');
+        $email->setTo($to);
+        $email->setSubject($subject);
+        $email->setMessage($message);
+        if($email->send()){
+            session()->setTempdata('success', 'Plan added and billed successfully', 3);
+            return redirect()->to(base_url().'clients');
+        }else{
+            // session()->setTempdata('error', 'An error abaout email. SYSTEM!!', 3);
+            // return redirect()->to(base_url().'clients-bill-process/'.$id);
+            $data = $email->printDebugger(['headers']);
+            print_r($data); 
+        }
     }
 }

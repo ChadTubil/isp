@@ -68,4 +68,5 @@ $routes->post('clients/edit/(:segment)', 'ClientsController::clientedit/$1');
 $routes->get('clients/process/(:segment)', 'ClientsController::clientprocess/$1');
 $routes->get('clients/process-1/(:segment)/(:segment)', 'ClientsController::clientprocess1/$1/$2');
 $routes->add('clients/process-2/(:segment)/(:segment)', 'ClientsController::clientprocess2/$1/$2');
-$routes->get('clients-bill-process(:segment)', 'ClientsController::clientsbill/$1');
+$routes->get('clients-bill-process/(:segment)', 'ClientsController::clientsbill/$1');
+$routes->add('clients-bill-process-2/(:segment)', 'ClientsController::clientsbill2/$1');
